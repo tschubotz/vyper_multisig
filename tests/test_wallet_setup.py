@@ -20,6 +20,12 @@ def test_setup_threshold(not_setup_wallet, owners_2):
 def test_setup_threshold_not_higher_than_num_owners(not_setup_wallet, owners_2):
     with reverts():
         not_setup_wallet.setup(owners_2, 3)
+    with reverts():
+        not_setup_wallet.setup(owners_2, 10)
+
+def test_setup_threshold_not_too_low(not_setup_wallet, owners_2):
+    with reverts():
+        not_setup_wallet.setup(owners_2, 0)
 
 def test_setup_only_once(not_setup_wallet, owners_2):
     not_setup_wallet.setup(owners_2, 2)
